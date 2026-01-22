@@ -1,4 +1,4 @@
-# Springboot-Controlle-Layer-Annotations
+# Springboot-Controller-Layer-Annotations
 
 # Spring Boot Annotations - Comprehensive Notes
 
