@@ -197,9 +197,9 @@ Spring supports three main injection types:
 
 | Type | Annotation Location | Use Case | Recommendation |
 |------|---------------------|----------|----------------|
-| **Field Injection** | On the field | Quick prototyping | ❌ Avoid |
-| **Setter Injection** | On setter method | Optional dependencies | ⚠️ Use sparingly |
-| **Constructor Injection** | On constructor | Mandatory dependencies | ✅ **Recommended** |
+| **Field Injection** | On the field | Quick prototyping |  Avoid |
+| **Setter Injection** | On setter method | Optional dependencies | Use sparingly |
+| **Constructor Injection** | On constructor | Mandatory dependencies |  **Recommended** |
 
 ---
 
@@ -263,7 +263,7 @@ class Order {
 private final Order order = null;  // Doesn't work as expected
 ```
 
-- Spring uses reflection and ignores `final`
+- Spring uses reflection and ignores `final`  AND reflection mostly does not respect final the way normal code does.
 - Breaks immutability principle
 - Field value changes after initialization
 
