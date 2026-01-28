@@ -550,3 +550,367 @@ Frameworks change.
 **These fundamentals do not.**
 
 ---
+
+## What is a port? 
+
+A **port** is a **number that tells your computer which application should receive a network request**.
+
+* **IP / host** → which machine
+* **Port** → which app on that machine
+
+---
+
+## Port in Spring Boot
+
+In a Spring Boot app, the port is where your **backend server(tomcat) listens for HTTP requests**.
+
+Default:
+
+```properties
+server.port=8080
+```
+
+So when you run your app and go to:
+
+```
+http://localhost:8080
+```
+
+You are:
+
+* talking to **your own computer** (`localhost`)
+* sending the request to **your Spring Boot app** (`8080`)
+
+---
+
+## How a request flows in Spring Boot
+
+```
+Browser
+  ↓
+localhost:8080
+  ↓
+Spring Controller (@RestController)
+  ↓
+Service
+  ↓
+Repository / DB
+```
+
+The **port is the entry point** into your backend.
+
+---
+
+## Multiple apps = multiple ports
+
+You can run many apps on the same machine because each uses a different port:
+
+* Spring Boot API → `8080`
+* Frontend dev server → `3000`
+* Database → `5432`
+
+Example:
+
+```
+Frontend (3000) → calls → Backend (8080)
+```
+
+---
+
+## One sentence to remember
+
+> **In Spring Boot, the port is the number your application listens on to receive HTTP requests.**
+
+
+
+## How ports fit into *any* backend
+
+Any backend (Java, Node, Python, Go, etc.):
+
+1. **Starts a server**
+2. **Binds to a port**
+3. **Listens for requests on that port**
+
+Example:
+
+```
+Backend API running on port 8080
+```
+
+Requests sent to:
+
+```
+http://localhost:8080/users
+```
+
+will be handled by *that* backend app.
+
+---
+
+## Frontend ↔ Backend (real-world setup)
+
+Typical dev setup:
+
+```
+Frontend: http://localhost:3000
+Backend:  http://localhost:8080
+```
+
+Same machine, **different ports**, **different applications**.
+
+This difference is what leads to **CORS**.
+
+---
+
+## What is CORS?
+
+**CORS (Cross-Origin Resource Sharing)** is a **browser security rule**.
+
+Browsers block frontend JavaScript from calling a backend **on a different origin** unless the backend explicitly allows it.
+
+---
+
+## What counts as a “different origin”?
+
+An origin is defined by **three things**:
+
+```
+protocol + host + port
+```
+
+Examples:
+
+* `http://localhost:3000`
+* `http://localhost:8080`
+
+These are **different origins** because the **port is different**.
+
+---
+
+## Why browsers block this
+
+Without CORS:
+
+* Any website could call your backend
+* Steal data using your login session
+
+So browsers say:
+
+> “Backend must explicitly say who’s allowed.”
+
+---
+
+## How CORS actually works (simplified)
+
+1. Frontend sends a request to backend
+2. Browser checks backend’s response headers
+3. Backend must include headers like:
+
+   ```
+   Access-Control-Allow-Origin: http://localhost:3000
+   ```
+4. If allowed → request succeeds
+   If not → browser blocks it
+
+Important:
+ **The backend allows it**
+ **The browser enforces it**
+
+---
+
+## One-line summary for ports
+
+> **A port identifies which backend application receives a network request.**
+
+## One-line summary for CORS
+
+> **CORS is a browser security rule that controls which frontend origins are allowed to call a backend.**
+
+
+
+## Example request
+
+```
+GET http://localhost:8080/users/42
+```
+
+---
+
+## Step 1: Browser / frontend creates the request
+
+The frontend (browser, mobile app, Postman, etc.) prepares:
+
+* **Method:** `GET`
+* **URL:** `http://localhost:8080/users/42`
+* **Headers:** (optional)
+
+  * `Authorization`
+  * `Content-Type`
+* **Body:** none (GET usually has no body)
+
+---
+
+## Step 2: Network routing (host + port)
+
+The OS looks at:
+
+```
+localhost:8080
+```
+
+* `localhost` → this machine
+* `8080` → the backend app listening on that port
+
+The request is handed to **that backend process**.
+
+---
+
+## Step 3: Backend server receives the request
+
+Your backend server:
+
+* is already running
+* is **listening on port 8080**
+* accepts the HTTP request
+
+At this point, it knows:
+
+* HTTP method = `GET`
+* Path = `/users/42`
+
+---
+
+## Step 4: Routing / request matching
+
+The backend checks:
+
+> “Do I have an endpoint that matches **GET + /users/{id}**?”
+
+If yes → route it there
+If no → return **404 Not Found**
+
+---
+
+## Step 5: Controller / handler logic
+
+The matched handler runs.
+
+Typical responsibilities:
+
+* extract `id = 42` from the path
+* validate input
+* check authentication / authorization
+
+No business logic yet — just request handling.
+
+---
+
+## Step 6: Business logic (service layer)
+
+The handler calls business logic:
+
+* apply rules
+* decide *what* needs to happen
+* request data from storage
+
+Example:
+
+```
+getUserById(42)
+```
+
+---
+
+## Step 7: Data access (database or external service)
+
+The backend:
+
+* queries the database
+* or calls another service
+
+Example SQL (conceptually):
+
+```
+SELECT * FROM users WHERE id = 42;
+```
+
+The data is returned to the backend.
+
+---
+
+## Step 8: Build the response
+
+The backend constructs:
+
+* **Status code:** `200 OK`
+* **Headers:** `Content-Type: application/json`
+* **Body:**
+
+```json
+{
+  "id": 42,
+  "name": "Alice"
+}
+```
+
+---
+
+## Step 9: Response sent back over the network
+
+The response travels back to:
+
+```
+localhost:3000 (frontend)
+```
+
+or wherever the request came from.
+
+If this was cross-origin:
+
+* browser checks **CORS headers**
+* blocks or allows the response
+
+---
+
+## Step 10: Frontend receives and uses the data
+
+Frontend:
+
+* parses JSON
+* updates UI
+* shows user info
+
+Done 
+
+---
+
+## Full flow in one view
+
+```
+Frontend
+  ↓
+HTTP request (GET /users/42)
+  ↓
+Backend server (port 8080)
+  ↓
+Router
+  ↓
+Controller / Handler
+  ↓
+Service (business logic)
+  ↓
+Database
+  ↑
+Response (JSON + status)
+  ↑
+Browser / frontend
+```
+
+---
+
+## One-sentence takeaway
+
+> A request is created by the client, routed by host + port, matched by method + path, processed by backend logic, and returned as an HTTP response.
+
+
+
