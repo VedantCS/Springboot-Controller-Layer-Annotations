@@ -353,6 +353,7 @@ Spring:
 Powered by:
 
 * Jackson
+* Spring Boot uses Jackson (or any configured JSON serializer) to automatically convert objects to JSON.
 * HttpMessageConverters
 
 ---
