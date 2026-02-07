@@ -1,10 +1,3 @@
-# Spring Boot AOP (Aspect-Oriented Programming) - Complete Guide
-
-> **Comprehensive notes on Aspect-Oriented Programming in Spring Boot**  
-> Covering concepts, pointcut expressions, advice types, and internal proxy mechanisms
-
----
-
 ## Table of Contents
 - [1. Introduction to AOP](#1-introduction-to-aop)
 - [2. Core Concepts](#2-core-concepts)
@@ -1872,9 +1865,3 @@ public class UserService {
 ## Additional Resources
 
 - [Spring AOP Documentation](https://docs.spring.io/spring-framework/reference/core/aop.html)
-- [AspectJ Documentation](https://www.eclipse.org/aspectj/doc/released/progguide/index.html)
-- [Baeldung Spring AOP Tutorial](https://www.baeldung.com/spring-aop)
-
----
-
-**Happy Coding! 🚀**
