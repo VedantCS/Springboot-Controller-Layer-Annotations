@@ -32,6 +32,7 @@ Application Logic → JPA (Interface) → Hibernate (Implementation)
 ORM acts as a **bridge between Java objects and database tables**. You don't need to write SQL queries; instead, you manipulate objects, and the ORM framework generates the necessary SQL. [linkedin](https://www.linkedin.com/pulse/quick-journey-persistence-understanding-jpa-entity-ali-d3lsf)
 
 ***
+<img width="1107" height="638" alt="image" src="https://github.com/user-attachments/assets/af005e29-6326-44b7-8992-20799757cdbb" />
 
 ## **Concept Map**
 
@@ -236,7 +237,7 @@ public class UserController {
 
 ***
 
-## **JPA Architecture: Deep Dive**
+## **JPA Architecture:**
 
 ### 1. Persistence Unit
 
@@ -261,7 +262,7 @@ A **Persistence Unit** is a logical grouping of entity classes that share the sa
 **With Spring Boot:**
 All of this configuration is handled through `application.properties`. Spring Boot assumes **one database = one persistence unit** and auto-configures everything. 
 
-**Multiple Databases?** If your application connects to multiple databases (e.g., MySQL and PostgreSQL), you need multiple persistence units. In this case, use `@Configuration` classes instead of `application.properties`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/82314936/0f4e052b-5e02-450e-bccb-8c2b0a689bce/paste.txt)
+**Multiple Databases?** If your application connects to multiple databases (e.g., MySQL and PostgreSQL), you need multiple persistence units. In this case, use `@Configuration` classes instead of `application.properties`. 
 
 ### 2. EntityManagerFactory
 
