@@ -38,7 +38,12 @@ Key concepts include:
 
 This process is known as Object-Relational Mapping (ORM).
 Before JPA, the term ORM was commonly used to describe frameworks like Hibernate, which is why Hibernate is often referred to as an ORM framework.
-***
+ 
+ **JPA allows you to map application classes directly to database tables.**
+
+- **Entity Manager** – Once mappings are defined, the Entity Manager manages your entities and handles all interactions with the database.
+- **JPQL (Java Persistence Query Language)** – Provides a way to write queries against entities. Unlike SQL, JPQL understands the mappings between entities and tables, allowing you to add conditions as needed.
+- **Criteria API** – Offers a Java-based API to build and execute queries programmatically against the database
 
 ## **Concept Map**
 
