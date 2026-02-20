@@ -277,6 +277,9 @@ Integer count = jdbcTemplate.queryForObject(
 
 Spring Boot automatically configures HikariCP as the default connection pool. HikariCP is known for being fast and lightweight. [linkedin](https://www.linkedin.com/pulse/best-practice-using-spring-data-jpa-chamseddine-toujani-wgcae)
 
+HikariCP is a high-performance, lightweight JDBC connection pooling library for Java applications, renowned for its speed, minimal footprint (~165Kb), and reliability. It acts as the default connection pool for Spring Boot 2.0 and later, providing efficient management of database connections to reduce latency and improve database interaction efficiency
+
+
 ### Default Configuration
 
 - **Maximum pool size**: 10 connections
