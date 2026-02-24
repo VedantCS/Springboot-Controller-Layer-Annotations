@@ -170,7 +170,7 @@ private Long id;
 | Strategy | How It Works | Pros | Cons | Best For |
 |----------|--------------|------|------|----------|
 | **IDENTITY** | DB auto-increment column  [stackoverflow](https://stackoverflow.com/questions/8955074/generatedvaluestrategy-identity-vs-generatedvaluestrategy-sequence) | Simple, DB-native | **Table-specific**, slow batch inserts | Small apps, MySQL  [stackoverflow](https://stackoverflow.com/questions/8955074/generatedvaluestrategy-identity-vs-generatedvaluestrategy-sequence) |
-| **SEQUENCE** | DB sequence object  [stackoverflow](https://stackoverflow.com/questions/8955074/generatedvaluestrategy-identity-vs-generatedvaluestrategy-sequence) | **DB-independent**, cacheable, fast batch  [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/82314936/0f4e052b-5e02-450e-bccb-8c2b0a689bce/paste.txt) | More complex setup | **Production**  [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/82314936/0f4e052b-5e02-450e-bccb-8c2b0a689bce/paste.txt) |
+| **SEQUENCE** | DB sequence object  [stackoverflow](https://stackoverflow.com/questions/8955074/generatedvaluestrategy-identity-vs-generatedvaluestrategy-sequence) | **DB-independent**, cacheable, fast batch   | More complex setup | **Production**  |
 
 **SEQUENCE Example**:
 ```java
